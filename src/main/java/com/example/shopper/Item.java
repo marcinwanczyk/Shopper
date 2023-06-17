@@ -3,7 +3,7 @@ package com.example.shopper;
 import jakarta.persistence.*;
 
 @Entity
-@Table( name = "items")
+@Table(name = "items")
 public class Item {
 
     @Id
@@ -14,9 +14,10 @@ public class Item {
     @Column(columnDefinition = "VARCHAR(255)")
     private int amount;
 
-    public Item(){}
+    public Item() {
+    }
 
-    public Item(Long id, String name, int amount){
+    public Item(Long id, String name, int amount) {
         this.id = id;
         this.name = name;
         this.amount = amount;
