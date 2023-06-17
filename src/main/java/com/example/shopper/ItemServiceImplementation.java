@@ -9,13 +9,14 @@ import java.util.Optional;
 public class ItemServiceImplementation implements ItemService {
 
     private final ItemRepo itemRepo;
-
+    private int counter = 0;
     public ItemServiceImplementation(ItemRepo itemRepo) {
         this.itemRepo = itemRepo;
     }
 
     @Override
     public List<Item> getAllItems() {
+        counter++;
         return itemRepo.findAll();
     }
 
@@ -32,5 +33,9 @@ public class ItemServiceImplementation implements ItemService {
     @Override
     public void deleteItem(Long id) {
         itemRepo.deleteById(id);
+    }
+
+    public String getCounter() {
+        return "Number of requests: " + counter;
     }
 }

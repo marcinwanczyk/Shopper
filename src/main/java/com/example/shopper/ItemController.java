@@ -37,10 +37,13 @@ public class ItemController {
         item.setId(id);
         return itemService.saveItem(item);
     }
-
     @DeleteMapping("/{id}")
     public void deleteItem(@PathVariable Long id) {
         itemService.deleteItem(id);
     }
 
+    @GetMapping("/counter")
+    public String getCounter() {
+        return "Number of requests: " + itemService.getCounter();
+    }
 }

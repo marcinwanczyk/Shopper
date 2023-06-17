@@ -1,4 +1,5 @@
-<h2>Item List</h2>
+<h2>Shopping List</h2>
+<p>Number of requests: {{ counter }}</p>
 <table>
   <thead>
   <tr>
@@ -39,4 +40,69 @@
 
   <button type="submit">Add Item</button>
 </form>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  label {
+    display: inline-block;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], input[type="number"] {
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+
+  button {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #d32f2f;
+  }
+</style>
 

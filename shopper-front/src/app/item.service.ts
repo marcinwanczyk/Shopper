@@ -8,7 +8,8 @@ import {Item} from './item';
 })
 export class ItemService {
 
-  private baseUrl = 'http://localhost:8080/items';
+  private baseUrl = 'http://localhost:8080/items'
+  private counter = 0;
 
   constructor(private http: HttpClient) {
   }
@@ -31,5 +32,12 @@ export class ItemService {
 
   deleteItem(id: number | undefined): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getCounter(): Observable<number> {
+    return new Observable<number>((observer) => {
+      observer.next(this.counter);
+      observer.complete();
+    });
   }
 }

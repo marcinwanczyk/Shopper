@@ -11,4 +11,6 @@ public interface ItemService {
     Item saveItem(Item item);
 
     void deleteItem(Long id);
+
+    String getCounter();
 }

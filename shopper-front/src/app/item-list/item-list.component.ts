@@ -15,27 +15,30 @@ export class ItemListComponent implements OnInit {
   newItemAmount = '';
   editingItem = false;
   editedItem: Item = {name: '', amount: 0};
+  // counter: number;
 
   constructor(private itemService: ItemService) {
   }
 
   ngOnInit(): void {
     this.getAllItems();
+    // this.getCounter();
   }
 
   getAllItems(): void {
     this.itemService.getAllItems().subscribe(items => this.items = items);
   }
 
-  // addItem(form: NgForm): void {
   addItem(): void {
     const newItem: Item = {name: this.newItemName, amount: parseInt(this.newItemAmount)} as Item;
-    this.itemService.addItem(newItem).subscribe(item => {
-      this.items.push(item);
-    });
-    this.newItemName = '';
-    this.newItemAmount = '';
-    // form.resetForm();
+    if (newItem.amount > 0) {
+      this.itemService.addItem(newItem).subscribe(item => {
+        this.items.push(item);
+
+      });
+      this.newItemName = '';
+      this.newItemAmount = '';
+    }
   }
 
   editItem(item: Item): void {
@@ -45,7 +48,7 @@ export class ItemListComponent implements OnInit {
 
   saveItem(): void {
     const index = this.items.findIndex(item => item.id === this.editedItem.id);
-    if (index !== -1) {
+    if (index !== -1 && this.editedItem.amount > 0) {
       this.items[index] = {...this.editedItem};
     }
     this.editingItem = false;
@@ -56,11 +59,18 @@ export class ItemListComponent implements OnInit {
     this.editingItem = false;
     this.editedItem = {name: '', amount: 0};
   }
-
   deleteItem(item: Item): void {
     this.itemService.deleteItem(item.id!).subscribe(() => {
       this.items = this.items.filter(i => i !== item);
     });
   }
+
+  // getCounter(): void {
+  //   this.itemService.getCounter().subscribe((counter: number) => console.log(counter));
+  // }
+  // getCounter(): void {
+  //   this.itemService.getCounter()
+  //     .subscribe(counter => this.counter = counter);
+  // }
 
 }
