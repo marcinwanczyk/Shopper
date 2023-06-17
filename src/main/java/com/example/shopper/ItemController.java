@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/items")
 public class ItemController {
 
@@ -27,26 +28,19 @@ public class ItemController {
     }
 
     @PostMapping("")
-    public Item addItem(@RequestBody Item item){
+    public Item addItem(@RequestBody Item item) {
         return itemService.saveItem(item);
     }
 
     @PutMapping("/{id}")
-    public Item editItem(@PathVariable Long id, @RequestBody Item item){
+    public Item editItem(@PathVariable Long id, @RequestBody Item item) {
         item.setId(id);
         return itemService.saveItem(item);
     }
-    @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable Long id){
-        itemService.deleteItem(id);
-    }
 
-    @GetMapping("/test")
-    public void createTestItem() {
-        Item testItem = new Item();
-        testItem.setName("marchewka");
-        testItem.setAmount(1);
-        itemService.saveItem(testItem);
+    @DeleteMapping("/{id}")
+    public void deleteItem(@PathVariable Long id) {
+        itemService.deleteItem(id);
     }
 
 }

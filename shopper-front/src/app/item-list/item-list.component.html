@@ -1,0 +1,42 @@
+<h2>Item List</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Amount</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td>{{ item.name }}</td>
+    <td>{{ item.amount }}</td>
+    <td>
+      <button (click)="editItem(item)">Edit</button>
+      <button (click)="deleteItem(item)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<form *ngIf="editingItem" (ngSubmit)="saveItem()">
+  <label for="edit-name">Name:</label>
+  <input type="text" id="edit-name" name="edit-name" [(ngModel)]="editedItem.name">
+
+  <label for="edit-amount">Amount:</label>
+  <input type="number" id="edit-amount" name="edit-amount" [(ngModel)]="editedItem.amount">
+
+  <button type="submit">Save</button>
+  <button type="button" (click)="cancelEdit()">Cancel</button>
+</form>
+
+<form (ngSubmit)="addItem()">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" [(ngModel)]="newItemName">
+
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" name="amount" [(ngModel)]="newItemAmount">
+
+  <button type="submit">Add Item</button>
+</form>
+
