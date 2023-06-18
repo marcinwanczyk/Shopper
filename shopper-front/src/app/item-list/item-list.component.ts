@@ -15,6 +15,7 @@ export class ItemListComponent implements OnInit {
   editingItem = false;
   editedItem: Item = {name: '', amount: 0};
   counter = 0;
+  searchQuery: string = '';
 
   constructor(private itemService: ItemService) {
   }
@@ -83,4 +84,11 @@ export class ItemListComponent implements OnInit {
     this.itemService.getCounter().subscribe(counter => this.counter = counter);
   }
 
+  searchItems(): void {
+    if (this.searchQuery) {
+      this.items = this.items.filter(item => item.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    } else {
+      this.getAllItems();
+    }
+  }
 }

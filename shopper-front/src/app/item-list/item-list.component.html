@@ -1,6 +1,7 @@
 <h2>Shopping List</h2>
 <p>Number of requests: {{ counter }}</p>
 <button (click)="sortItems()">Sort Alphabetically</button>
+
 <table>
   <thead>
   <tr>
@@ -42,6 +43,10 @@
   <button type="submit">Add Item</button>
 </form>
 
+<div>
+  <label for="search">Search: </label>
+  <input type="text" id="search" name="search" [(ngModel)]="searchQuery" (input)="searchItems() ">
+</div>
 <style>
   table {
     border-collapse: collapse;
