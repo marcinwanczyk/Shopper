@@ -12,25 +12,35 @@ export class ItemService {
   private counter = 0;
 
   constructor(private http: HttpClient) {
+    const storedCounter = localStorage.getItem('counter');
+    if (storedCounter) {
+      this.counter = parseInt(storedCounter);
+    }
   }
 
   getAllItems(): Observable<Item[]> {
+    this.counter++;
     return this.http.get<Item[]>(`${this.baseUrl}`);
   }
 
   getItemById(id: number): Observable<Item> {
+    this.counter++;
     return this.http.get<Item>(`${this.baseUrl}/${id}`);
   }
 
   addItem(item: Item): Observable<Item> {
+    this.counter++;
     return this.http.post<Item>(`${this.baseUrl}`, item);
   }
 
   editItem(id: number, item: Item): Observable<Item> {
+    this.counter++;
+    this.saveCounter();
     return this.http.put<Item>(`${this.baseUrl}/${id}`, item);
   }
 
   deleteItem(id: number | undefined): Observable<void> {
+    this.counter++;
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
@@ -40,4 +50,9 @@ export class ItemService {
       observer.complete();
     });
   }
+
+  saveCounter(): void {
+    localStorage.setItem('counter', this.counter.toString());
+  }
+
 }
